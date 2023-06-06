@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище autoAutoModelContainer" CdmEntityContainer="autoAutoEntities">
+    <EntitySetMapping Name="Customerses">
+      <EntityTypeMapping TypeName="autoAutoModel.Customers">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailNames">
+      <EntityTypeMapping TypeName="autoAutoModel.DetailNames">
+        <MappingFragment StoreEntitySet="DetailNames">
+          <ScalarProperty Name="DetailNameId" ColumnName="DetailNameId" />
+          <ScalarProperty Name="DetailName" ColumnName="DetailName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detailsses">
+      <EntityTypeMapping TypeName="autoAutoModel.Detailss">
+        <MappingFragment StoreEntitySet="Detailss">
+          <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+          <ScalarProperty Name="DetailTypeId" ColumnName="DetailTypeId" />
+          <ScalarProperty Name="DetailNameId" ColumnName="DetailNameId" />
+          <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Kol" ColumnName="Kol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailTypes">
+      <EntityTypeMapping TypeName="autoAutoModel.DetailType">
+        <MappingFragment StoreEntitySet="DetailType">
+          <ScalarProperty Name="DetailTypeId" ColumnName="DetailTypeId" />
+          <ScalarProperty Name="DetailTypeName" ColumnName="DetailType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korzinas">
+      <EntityTypeMapping TypeName="autoAutoModel.Korzina">
+        <MappingFragment StoreEntitySet="Korzina">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NameId" ColumnName="NameId" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Kol" ColumnName="Kol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Markas">
+      <EntityTypeMapping TypeName="autoAutoModel.Marka">
+        <MappingFragment StoreEntitySet="Marka">
+          <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+          <ScalarProperty Name="MarkaName" ColumnName="MarkaName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="autoAutoModel.Model">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orderses">
+      <EntityTypeMapping TypeName="autoAutoModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="DetailNameId" ColumnName="DetailNameId" />
+          <ScalarProperty Name="Kol" ColumnName="Kol" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers_2s">
+      <EntityTypeMapping TypeName="autoAutoModel.Customers_2">
+        <MappingFragment StoreEntitySet="Customers_2">
+          <ScalarProperty Name="Kol" ColumnName="Kol" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="DetailNameId" ColumnName="DetailNameId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

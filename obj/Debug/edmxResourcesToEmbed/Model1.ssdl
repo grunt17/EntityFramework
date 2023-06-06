@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище autoAutoModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customers_2">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="15" />
+    <Property Name="DetailNameId" Type="int" />
+    <Property Name="MarkaId" Type="int" />
+    <Property Name="ModelId" Type="int" />
+    <Property Name="Cost" Type="money" />
+    <Property Name="Kol" Type="int" />
+  </EntityType>
+  <EntityType Name="DetailNames">
+    <Key>
+      <PropertyRef Name="DetailNameId" />
+    </Key>
+    <Property Name="DetailNameId" Type="int" Nullable="false" />
+    <Property Name="DetailName" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Detailss">
+    <Key>
+      <PropertyRef Name="DetailId" />
+    </Key>
+    <Property Name="DetailId" Type="int" Nullable="false" />
+    <Property Name="DetailTypeId" Type="int" />
+    <Property Name="DetailNameId" Type="int" />
+    <Property Name="MarkaId" Type="int" />
+    <Property Name="ModelId" Type="int" />
+    <Property Name="Cost" Type="money" />
+    <Property Name="Kol" Type="int" />
+  </EntityType>
+  <EntityType Name="DetailType">
+    <Key>
+      <PropertyRef Name="DetailTypeId" />
+    </Key>
+    <Property Name="DetailTypeId" Type="int" Nullable="false" />
+    <Property Name="DetailType" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Korzina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="NameId" Type="int" />
+    <Property Name="Cost" Type="int" />
+    <Property Name="Kol" Type="int" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="MarkaId" />
+    </Key>
+    <Property Name="MarkaId" Type="int" Nullable="false" />
+    <Property Name="MarkaName" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="ModelId" />
+    </Key>
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="ModelName" Type="nchar" MaxLength="15" />
+    <Property Name="MarkaId" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DetailNameId" Type="int" />
+    <Property Name="Kol" Type="int" />
+    <Property Name="Cost" Type="int" />
+  </EntityType>
+  <Association Name="FK_Detailss_ToDetailNames">
+    <End Role="DetailNames" Type="Self.DetailNames" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailNames">
+        <PropertyRef Name="DetailNameId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="DetailNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToDetailType">
+    <End Role="DetailType" Type="Self.DetailType" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailType">
+        <PropertyRef Name="DetailTypeId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="DetailTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToMarka">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="MarkaId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToModel">
+    <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="ModelId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Model_ToMarka">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="MarkaId" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище autoAutoModelContainer">
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers_2" EntityType="Self.Customers_2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailNames" EntityType="Self.DetailNames" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detailss" EntityType="Self.Detailss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailType" EntityType="Self.DetailType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korzina" EntityType="Self.Korzina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marka" EntityType="Self.Marka" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Detailss_ToDetailNames" Association="Self.FK_Detailss_ToDetailNames">
+      <End Role="DetailNames" EntitySet="DetailNames" />
+      <End Role="Detailss" EntitySet="Detailss" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToDetailType" Association="Self.FK_Detailss_ToDetailType">
+      <End Role="DetailType" EntitySet="DetailType" />
+      <End Role="Detailss" EntitySet="Detailss" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToMarka" Association="Self.FK_Detailss_ToMarka">
+      <End Role="Marka" EntitySet="Marka" />
+      <End Role="Detailss" EntitySet="Detailss" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToModel" Association="Self.FK_Detailss_ToModel">
+      <End Role="Model" EntitySet="Model" />
+      <End Role="Detailss" EntitySet="Detailss" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Model_ToMarka" Association="Self.FK_Model_ToMarka">
+      <End Role="Marka" EntitySet="Marka" />
+      <End Role="Model" EntitySet="Model" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="autoAutoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DetailNames">
+    <Key>
+      <PropertyRef Name="DetailNameId" />
+    </Key>
+    <Property Name="DetailNameId" Type="Int32" Nullable="false" />
+    <Property Name="DetailName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Detailss" Relationship="Self.FK_Detailss_ToDetailNames" FromRole="DetailNames" ToRole="Detailss" />
+  </EntityType>
+  <EntityType Name="Detailss">
+    <Key>
+      <PropertyRef Name="DetailId" />
+    </Key>
+    <Property Name="DetailId" Type="Int32" Nullable="false" />
+    <Property Name="DetailTypeId" Type="Int32" />
+    <Property Name="DetailNameId" Type="Int32" />
+    <Property Name="MarkaId" Type="Int32" />
+    <Property Name="ModelId" Type="Int32" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Kol" Type="Int32" />
+    <NavigationProperty Name="DetailNames" Relationship="Self.FK_Detailss_ToDetailNames" FromRole="Detailss" ToRole="DetailNames" />
+    <NavigationProperty Name="DetailType" Relationship="Self.FK_Detailss_ToDetailType" FromRole="Detailss" ToRole="DetailType" />
+    <NavigationProperty Name="Marka" Relationship="Self.FK_Detailss_ToMarka" FromRole="Detailss" ToRole="Marka" />
+    <NavigationProperty Name="Model" Relationship="Self.FK_Detailss_ToModel" FromRole="Detailss" ToRole="Model" />
+  </EntityType>
+  <EntityType Name="DetailType">
+    <Key>
+      <PropertyRef Name="DetailTypeId" />
+    </Key>
+    <Property Name="DetailTypeId" Type="Int32" Nullable="false" />
+    <Property Name="DetailTypeName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Detailss" Relationship="Self.FK_Detailss_ToDetailType" FromRole="DetailType" ToRole="Detailss" />
+  </EntityType>
+  <EntityType Name="Korzina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="NameId" Type="Int32" />
+    <Property Name="Cost" Type="Int32" />
+    <Property Name="Kol" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Marka">
+    <Key>
+      <PropertyRef Name="MarkaId" />
+    </Key>
+    <Property Name="MarkaId" Type="Int32" Nullable="false" />
+    <Property Name="MarkaName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Detailss" Relationship="Self.FK_Detailss_ToMarka" FromRole="Marka" ToRole="Detailss" />
+    <NavigationProperty Name="Model" Relationship="Self.FK_Model_ToMarka" FromRole="Marka" ToRole="Model" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="ModelId" />
+    </Key>
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <Property Name="ModelName" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="MarkaId" Type="Int32" />
+    <NavigationProperty Name="Detailss" Relationship="Self.FK_Detailss_ToModel" FromRole="Model" ToRole="Detailss" />
+    <NavigationProperty Name="Marka" Relationship="Self.FK_Model_ToMarka" FromRole="Model" ToRole="Marka" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DetailNameId" Type="Int32" />
+    <Property Name="Kol" Type="Int32" />
+    <Property Name="Cost" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Detailss_ToDetailNames">
+    <End Role="DetailNames" Type="Self.DetailNames" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailNames">
+        <PropertyRef Name="DetailNameId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="DetailNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToDetailType">
+    <End Role="DetailType" Type="Self.DetailType" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetailType">
+        <PropertyRef Name="DetailTypeId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="DetailTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToMarka">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="MarkaId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detailss_ToModel">
+    <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+    <End Role="Detailss" Type="Self.Detailss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="ModelId" />
+      </Principal>
+      <Dependent Role="Detailss">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Model_ToMarka">
+    <End Role="Marka" Type="Self.Marka" Multiplicity="0..1" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marka">
+        <PropertyRef Name="MarkaId" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="MarkaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="autoAutoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customerses" EntityType="Self.Customers" />
+    <EntitySet Name="DetailNames" EntityType="Self.DetailNames" />
+    <EntitySet Name="Detailsses" EntityType="Self.Detailss" />
+    <EntitySet Name="DetailTypes" EntityType="Self.DetailType" />
+    <EntitySet Name="Korzinas" EntityType="Self.Korzina" />
+    <EntitySet Name="Markas" EntityType="Self.Marka" />
+    <EntitySet Name="Models" EntityType="Self.Model" />
+    <EntitySet Name="Orderses" EntityType="Self.Orders" />
+    <AssociationSet Name="FK_Detailss_ToDetailNames" Association="Self.FK_Detailss_ToDetailNames">
+      <End Role="DetailNames" EntitySet="DetailNames" />
+      <End Role="Detailss" EntitySet="Detailsses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToDetailType" Association="Self.FK_Detailss_ToDetailType">
+      <End Role="DetailType" EntitySet="DetailTypes" />
+      <End Role="Detailss" EntitySet="Detailsses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToMarka" Association="Self.FK_Detailss_ToMarka">
+      <End Role="Marka" EntitySet="Markas" />
+      <End Role="Detailss" EntitySet="Detailsses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detailss_ToModel" Association="Self.FK_Detailss_ToModel">
+      <End Role="Model" EntitySet="Models" />
+      <End Role="Detailss" EntitySet="Detailsses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Model_ToMarka" Association="Self.FK_Model_ToMarka">
+      <End Role="Marka" EntitySet="Markas" />
+      <End Role="Model" EntitySet="Models" />
+    </AssociationSet>
+    <EntitySet Name="Customers_2s" EntityType="autoAutoModel.Customers_2" />
+  </EntityContainer>
+  <EntityType Name="Customers_2">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="DetailNameId" Type="Int32" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Kol" Type="Int32" />
+  </EntityType>
+</Schema>
